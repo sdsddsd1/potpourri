@@ -1,0 +1,11 @@
+Look ma, no linux!
+
+This is a kiss repository structure to be build on
+a OBSD base system. Native packages should not be
+needed.
+
+Does this work? Some stuff already does.
+Does this make sense? Thats up to you to decide!
+
+Credits and big ups to Dylan Araps for the awesome
+KISS project. k1ss.org
