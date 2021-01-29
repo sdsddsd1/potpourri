@@ -1,0 +1,3 @@
+https://github.com/mesonbuild/meson/archive/0.56.2.tar.gz
+patches/patch-mesonbuild_build_py
+patches/patch-test_cases_common_189_openmp_meson_build

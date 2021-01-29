@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+# Fix build with GCC 10.
+#export CFLAGS="$CFLAGS -fcommon"
+
+./configure \
+    --disable-unicode \
+    --disable-taskstats
+
+make
+make DESTDIR="$1" install

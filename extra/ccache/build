@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+export DESTDIR="$1"
+#export CFLAGS="$CFLAGS -static"
+#export CXXFLAGS="$CXXFLAGS -static"
+export CFLAGS="$CFLAGS -D_BSD_SOURCE -D_XOPEN_SOURCE=700"
+export CXXFLAGS="$CXXFLAGS -D_BSD_SOURCE -D_XOPEN_SOURCE=700"
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DENABLE_TESTING=OFF \
+    -DZSTD_LIBRARY=/usr/local/lib/libzstd.a
+
+cmake --build   build
+cmake --install build

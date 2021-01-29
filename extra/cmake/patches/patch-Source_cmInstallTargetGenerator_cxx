@@ -1,0 +1,17 @@
+$OpenBSD: patch-Source_cmInstallTargetGenerator_cxx,v 1.2 2020/12/30 07:17:34 rsadowski Exp $
+
+Index: Source/cmInstallTargetGenerator.cxx
+--- Source/cmInstallTargetGenerator.cxx.orig
++++ Source/cmInstallTargetGenerator.cxx
+@@ -796,6 +796,11 @@ void cmInstallTargetGenerator::AddStripRule(std::ostre
+     return;
+   }
+ 
++  // Don't handle OpenBSD debug package builds.
++  if (this->Target->GetPropertyAsBool("CMAKE_OPENBSD_DEBUG_PACKAGES")) {
++    return;
++  }
++
+   // Don't handle OSX Bundles.
+   if (this->Target->Target->GetMakefile()->IsOn("APPLE") &&
+       this->Target->GetPropertyAsBool("MACOSX_BUNDLE")) {

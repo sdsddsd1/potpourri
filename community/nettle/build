@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+export CC=cc
+
+./configure \
+    --enable-shared \
+    --enable-static \
+    --enable-mini-gmp \
+    --disable-documentation
+
+gmake
+gmake DESTDIR="$1" install

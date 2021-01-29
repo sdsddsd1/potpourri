@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --disable-static \
+    --enable-libwebpmux \
+    --enable-libwebpdemux \
+    --enable-libwebpdecoder
+
+make
+make DESTDIR="$1" install

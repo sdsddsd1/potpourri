@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+# ccache is causing the issue to expect clang instead of gcc.
+# Just disable it.
+export CC="${CC:-/usr/local/bin/cc}"
+export CXX="${CXX:-/usr/local/bin/c++}"
+
+source/configure
+
+gmake
+gmake DESTDIR="$1" install

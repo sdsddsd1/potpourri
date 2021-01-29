@@ -1,0 +1,4 @@
+https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
+patches/patch-lib_relocatable_c
+patches/patch-libcharset_lib_localcharset_c
+patches/patch-src_Makefile_in

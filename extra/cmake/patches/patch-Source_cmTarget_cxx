@@ -1,0 +1,14 @@
+$OpenBSD: patch-Source_cmTarget_cxx,v 1.38 2020/12/30 07:17:34 rsadowski Exp $
+
+Index: Source/cmTarget.cxx
+--- Source/cmTarget.cxx.orig
++++ Source/cmTarget.cxx
+@@ -310,7 +310,7 @@ cmTarget::cmTarget(std::string const& name, cmStateEnu
+     initProp("INSTALL_NAME_DIR");
+     initProp("INSTALL_REMOVE_ENVIRONMENT_RPATH");
+     initPropValue("INSTALL_RPATH", "");
+-    initPropValue("INSTALL_RPATH_USE_LINK_PATH", "OFF");
++    initPropValue("INSTALL_RPATH_USE_LINK_PATH", "ON");
+     initProp("INTERPROCEDURAL_OPTIMIZATION");
+     initPropValue("SKIP_BUILD_RPATH", "OFF");
+     initPropValue("BUILD_WITH_INSTALL_RPATH", "OFF");

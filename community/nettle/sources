@@ -1,0 +1,9 @@
+https://ftp.gnu.org/gnu/nettle/nettle-3.7.tar.gz
+patches/patch-Makefile_in
+patches/patch-blowfish-bcrypt_c
+patches/patch-ecc-point-mul-g_c
+patches/patch-ecc-random_c
+patches/patch-fat-ppc_c
+patches/patch-getopt_c
+patches/patch-pss-mgf1_c
+

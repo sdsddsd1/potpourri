@@ -1,0 +1,8 @@
+https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tar.xz
+patches/python3-always-pip.patch
+patches/patch-Lib_test_test_locale_py
+patches/patch-Makefile_pre_in
+patches/patch-Modules__hashopenssl_c
+patches/patch-Modules__ssl_c
+patches/patch-configure_ac
+patches/patch-setup_py

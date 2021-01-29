@@ -1,0 +1,17 @@
+$OpenBSD: patch-CMakeLists_txt,v 1.2 2021/01/25 11:09:22 sthen Exp $
+
+The (experimental, as of 4.1) inode cache requires pthread_mutexattr_setpshared.
+https://github.com/ccache/ccache/pull/791
+
+Index: CMakeLists.txt
+--- CMakeLists.txt.orig
++++ CMakeLists.txt
+@@ -71,7 +71,7 @@ include(GNUInstallDirs)
+ include(GenerateConfigurationFile)
+ include(GenerateVersionFile)
+ 
+-if(HAVE_SYS_MMAN_H)
++if(HAVE_SYS_MMAN_H AND HAVE_PTHREAD_MUTEXATTR_SETPSHARED)
+   set(INODE_CACHE_SUPPORTED 1)
+ endif()
+ 

@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+export CC=cc
+
+./configure \
+    --enable-fontconfig \
+    --disable-asm
+
+gmake
+gmake DESTDIR="$1" install

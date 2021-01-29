@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+export CC=cc
+
+./configure \
+    --with-threads \
+    --with-history \
+    --without-python \
+    --without-icu \
+    --with-iconv=/usr/local/ \
+    --with-lzma=/usr/local/
+
+gmake
+gmake DESTDIR="$1" install

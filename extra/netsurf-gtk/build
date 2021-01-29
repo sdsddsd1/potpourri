@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+#export CFLAGS="$CFLAGS -fcommon"
+#export PERL5LIB="$PWD/usr/lib/perl5/vendor_perl/5.32.0/OpenBSD.amd64-openbsd-thread-multi"
+export PATH="$PATH:$PWD/xxd"
+
+# Give the Makefile busybox compatible arguments.
+#sed -i "s|$(Q)$(INSTALL) -T|$(Q)$(INSTALL) -Dm755|g" \
+#    netsurf/frontends/framebuffer/Makefile
+
+#for p in html-parser html-tagset; do (
+#    cd "$p"
+#
+#    perl Makefile.PL INSTALLDIRS=vendor
+#
+#    make
+#    make DESTDIR="$PWD/.." install
+#) done
+
+# Build standalone xxd to remove VIM rquirement
+cc xxd/xxd.c -o xxd/xxd
+
+gmake \
+    TARGET=gtk3
+
+gmake \
+    TARGET=gtk3 \
+    DESTDIR="$1" \
+    NETSURF_HOMEPAGE=https://lite.duckduckgo.com/lite \
+    install

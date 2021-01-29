@@ -1,0 +1,13 @@
+cairo
+cmake  make
+glib-networking
+gperf  make
+gtk+3
+harfbuzz-icu
+libXslt
+libgcrypt
+libsoup
+libwebp
+python make
+ruby   make
+sqlite

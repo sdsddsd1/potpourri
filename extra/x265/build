@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+cmake source \
+    -DCMAKE_BUILD_TYPE=Release
+
+cmake --build .
+cmake --install .

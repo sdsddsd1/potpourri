@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+# Remove the perl requirement from configure
+# as we have removed the perl requirement
+# ourselves :-).
+#sed -i 's/perl/:/g' configure
+
+CC=cc CXX=c++ ./configure \
+    --enable-vp8 \
+    --enable-vp9 \
+    --enable-experimental \
+    --enable-runtime-cpu-detect \
+    --enable-shared \
+    --enable-postproc \
+    --enable-pic \
+    --disable-tools \
+    --disable-examples \
+    --disable-docs \
+    --disable-unit-tests \
+    --disable-install-docs \
+    --disable-install-srcs \
+    --disable-install-bins \
+    --as=nasm
+
+gmake
+gmake DESTDIR="$1" install

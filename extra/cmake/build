@@ -1,0 +1,35 @@
+#!/bin/sh -e
+
+#patch -p1 < cmake-no-execinfo.patch
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+
+if kiss l cmake; then
+    export DESTDIR="$1"
+
+    cmake -B build \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_USE_SYSTEM_CURL=True \
+        -DCMAKE_USE_SYSTEM_EXPAT=True \
+        -DCMAKE_USE_SYSTEM_ZLIB=True \
+        -DCMAKE_USE_SYSTEM_BZIP2=True \
+        -DBUILD_TESTING=OFF
+
+    cmake --build   build
+    cmake --install build
+
+else
+    ./configure \
+        --system-curl \
+        --system-expat \
+        --system-zlib \
+        --system-bzip2
+
+    make
+    make DESTDIR="$1" install
+fi
+
+rm -rf "$1/usr/local/doc"
+rm -rf "$1/usr/local/share/cmake"*/Help

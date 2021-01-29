@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+export CC=cc
+
+cd build/generic
+
+./configure
+
+gmake
+gmake DESTDIR="$1" install

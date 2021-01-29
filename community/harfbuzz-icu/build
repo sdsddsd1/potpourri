@@ -1,0 +1,28 @@
+#!/bin/sh -e
+
+# Will store the built package's files to
+# allow us to cherry-pick the ICU related files.
+mkdir -p tmp
+export DESTDIR="$PWD/tmp"
+
+meson \
+    -Dglib=enabled \
+    -Dicu=enabled \
+    -Dicu_builtin=false \
+    -Dbenchmark=disabled \
+    -Dcairo=disabled \
+    -Ddocs=disabled \
+    . output
+
+ninja -C output
+ninja -C output install
+
+#install -D "$1/usr/local/lib"              tmp/usr/local/lib/libharfbuzz-icu*
+#install -D "$1/usr/local/lib/pkgconfig"    tmp/usr/local/lib/pkgconfig/harfbuzz-icu.pc
+#install -D "$1/usr/local/include/harfbuzz" tmp/usr/local/include/harfbuzz/hb-icu.h
+
+mkdir -p                                       "$1/usr/local/lib/pkgconfig"
+mkdir -p                                       "$1/usr/local/include/harfbuzz"
+cp tmp/usr/local/lib/libharfbuzz-icu*          "$1/usr/local/lib"
+cp tmp/usr/local/lib/pkgconfig/harfbuzz-icu.pc "$1/usr/local/lib/pkgconfig"
+cp tmp/usr/local/include/harfbuzz/hb-icu.h     "$1/usr/local/include/harfbuzz/hb-icu.h"

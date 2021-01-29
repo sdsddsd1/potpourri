@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+patch -p1 < x264-no-bash.patch
+
+./configure \
+    --disable-swscale \
+    --enable-static \
+    --enable-pic \
+    --enable-shared
+
+gmake
+gmake DESTDIR="$1" install

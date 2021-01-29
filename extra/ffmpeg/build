@@ -1,0 +1,48 @@
+#!/bin/sh -e
+
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+./configure \
+    --cc=cc \
+    --cxx=c++ \
+    --enable-shared \
+    --enable-gpl \
+    --enable-version3 \
+    --enable-nonfree \
+    --enable-openssl \
+    --enable-libass \
+    --enable-libmp3lame \
+    --enable-libopus \
+    --enable-libvorbis \
+    --enable-libvpx \
+    --enable-libx264 \
+    --disable-libx265 \
+    --enable-libxvid \
+    --enable-libwebp \
+    --enable-libdrm \
+    --x86asmexe=nasm \
+    --disable-debug \
+    --disable-libxml2 \
+    --disable-altivec \
+    --disable-indev=jack \
+    --disable-indev=oss \
+    --disable-mipsdsp \
+    --disable-mipsdspr2 \
+    --disable-mipsfpu \
+    --disable-mmi \
+    --disable-msa \
+    --disable-outdev=oss \
+    --disable-outdev=sdl2 \
+    --extra-cflags="-I/usr/local/include -I/usr/X11R6/include" \
+    --extra-libs="-L/usr/local/lib -L/usr/X11R6/lib" \
+    --extra-ldsoflags="-Wl"
+#    --objcc="/usr/bin/false" 
+#    --optflags="-Wno-redundant-decls" \
+
+gmake
+gmake DESTDIR="$1" install
+
+# Remove examples.
+rm -rf "$1/usr/share/ffmpeg/examples"
