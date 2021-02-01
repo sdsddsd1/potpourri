@@ -1,1 +1,2 @@
 curl     make
+gmake make

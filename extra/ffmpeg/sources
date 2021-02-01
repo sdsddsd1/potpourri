@@ -1,9 +1,9 @@
 https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz
-patches/patch-configure
-patches/patch-ffbuild_library_mak
-patches/patch-ffbuild_pkgconfig_generate_sh
-patches/patch-libavcodec_x86_h264_deblock_asm
-patches/patch-libavfilter_x86_vf_blend_asm
-patches/patch-libavutil_x86_x86inc_asm
-patches/patch-libswscale_x86_yuv_2_rgb_asm
+#patches/patch-configure
+#patches/patch-ffbuild_library_mak
+#patches/patch-ffbuild_pkgconfig_generate_sh
+#patches/patch-libavcodec_x86_h264_deblock_asm
+#patches/patch-libavfilter_x86_vf_blend_asm
+#patches/patch-libavutil_x86_x86inc_asm
+#patches/patch-libswscale_x86_yuv_2_rgb_asm
 

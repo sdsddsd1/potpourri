@@ -1,8 +1,37 @@
 #!/bin/sh -e
 
-for patch in patch-*; do
-    patch -p0 < "$patch"
-done
+export MAKE_ENV=V=1 \
+  libavcodec_extralibs="${LIBavcodec_EXTRALIBS}" \
+  libavdevice_extralibs="${LIBavdevice_EXTRALIBS}" \
+  libavfilter_extralibs="${LIBavfilter_EXTRALIBS}" \
+  libavformat_extralibs="${LIBavformat_EXTRALIBS}" \
+  libavresample_extralibs="${LIBavresample_EXTRALIBS}" \
+  libavutil_extralibs="${LIBavutil_EXTRALIBS}" \
+  libpostproc_extralibs="${LIBpostproc_EXTRALIBS}" \
+  libswresample_extralibs="${LIBswresample_EXTRALIBS}" \
+  libswscale_extralibs="${LIBswscale_EXTRALIBS}" \
+  libavcodec_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib" \
+  libavdevice_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib:${X11BASE}/lib" \
+  libavfilter_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib:${X11BASE}/lib" \
+  libavformat_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib" \
+  libavresample_linkflags="" \
+  libavutil_linkflags="" \
+  libpostproc_linkflags="" \
+  libswresample_linkflags="" \
+  libswscale_linkflags="" \
+  libavcodec_requires="libswresample libavutil" \
+  libavdevice_requires="libavfilter libswscale libpostproc libavformat libavcodec libswresample libavresample libavutil" \
+  libavfilter_requires="libswscale libpostproc libavformat libavcodec libswresample libavresample libavutil" \
+  libavformat_requires="libavcodec libswresample libavutil" \
+  libavresample_requires="libavutil" \
+  libavutil_requires="" \
+  libpostproc_requires="libavutil" \
+  libswresample_requires="libavutil" \
+  libswscale_requires="libavutil"
+
+#for patch in patch-*; do
+#    patch -p0 < "$patch"
+#done
 
 ./configure \
     --cc=cc \
@@ -37,12 +66,11 @@ done
     --disable-outdev=sdl2 \
     --extra-cflags="-I/usr/local/include -I/usr/X11R6/include" \
     --extra-libs="-L/usr/local/lib -L/usr/X11R6/lib" \
-    --extra-ldsoflags="-Wl"
-#    --objcc="/usr/bin/false" 
-#    --optflags="-Wno-redundant-decls" \
+    --objcc="/usr/bin/false" \
+    --optflags="-Wno-redundant-decls"
 
-gmake
-gmake DESTDIR="$1" install
+make
+make DESTDIR="$1" install
 
 # Remove examples.
 rm -rf "$1/usr/share/ffmpeg/examples"
