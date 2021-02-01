@@ -4,6 +4,8 @@ for patch in patch-*; do
     patch -p0 < "$patch"
 done
 
+export LIBVPX_VERSION=12.0
+
 # Remove the perl requirement from configure
 # as we have removed the perl requirement
 # ourselves :-).
