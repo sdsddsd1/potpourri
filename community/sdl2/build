@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+patch -p0 < patch-Makefile_in
+patch -p0 < patch-sdl2-config_cmake_in
+patch -p0 < patch-sdl2-config_in
+patch -p0 < patch-sdl2_pc_in
+patch -p0 < patch-src_SDL_c
+
+./configure \
+     --disable-alsa \
+     --disable-arts \
+     --disable-dbus \
+     --disable-esd \
+     --disable-ibus \
+     --disable-hidapi \
+     --disable-jack \
+     --disable-libsamplerate-shared \
+     --disable-libudev \
+     --disable-nas \
+     --disable-oss \
+     --disable-pulseaudio \
+     --disable-sndio-shared \
+     --disable-x11-shared
+gmake
+gmake DESTDIR="$1" install

@@ -13,6 +13,7 @@ for patch in patch-*; do
     patch -p0 < "$patch"
 done
 
+export CC=cc
 export CXXFLAGS="$CXXFLAGS -I/usr/X11R6/include"
 
 # Remove gettext requirement.

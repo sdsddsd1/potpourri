@@ -1,0 +1,6 @@
+https://libsdl.org/release/SDL2-2.0.14.tar.gz
+patches/patch-Makefile_in
+patches/patch-sdl2-config_cmake_in
+patches/patch-sdl2-config_in
+patches/patch-sdl2_pc_in
+patches/patch-src_SDL_c

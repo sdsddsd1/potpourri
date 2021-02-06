@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+make
+make \
+    DESTDIR="$1" \
+    MANPREFIX=/usr/share/man \
+    install
