@@ -1,0 +1,5 @@
+cairo
+freetype-harfbuzz
+fribidi
+glib
+meson   make

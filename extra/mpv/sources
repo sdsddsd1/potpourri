@@ -1,0 +1,5 @@
+https://github.com/mpv-player/mpv/archive/v0.33.0.tar.gz
+https://waf.io/waf-2.0.18
+#patches/patch-libmpv_client_h
+patches/patch-osdep_timer_c
+patches/patch-osdep_timer-linux_c

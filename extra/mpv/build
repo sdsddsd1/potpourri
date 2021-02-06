@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+for patch in patch-*; do
+    patch -p0 < "$patch"
+done
+
+ln -s waf-2.0.18 waf
+
+python waf configure \
+    --confdir=/etc/mpv \
+    --disable-alsa \
+    --disable-pulse \
+    --enable-libmpv-shared \
+    --enable-sdl2
+
+python waf build
+python waf install --destdir="$1"

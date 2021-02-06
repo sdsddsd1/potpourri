@@ -1,33 +1,62 @@
 #!/bin/sh -e
 
+export LOCALBASE=/usr/local/
+export X11BASE=/usr/X11R6/
+
+# inter library dependencies.
+export LIBavcodec_EXTRALIBS="-L${LOCALBASE}/lib -liconv -llzma -lmp3lame -lopus -lvorbis -lvorbisenc -lvpx -lx264 -lx265 -lxvidcore -lm -lz -pthread"
+export LIBavdevice_EXTRALIBS="-L${LOCALBASE}/lib -L${X11BASE}/lib -lX11 -lXext -lXv -lxcb-shape -lxcb-shm -lxcb-xfixes -lxcb -lsndio -lm"
+export LIBavfilter_EXTRALIBS="-L${LOCALBASE}/lib -L${X11BASE}/lib -lass -lfontconfig -lfreetype -lfribidi -lm -lz -pthread"
+export LIBavformat_EXTRALIBS="-L${LOCALBASE}/lib -lbz2 -lxml2 -lssl -lcrypto -lm -lz"
+export LIBavresample_EXTRALIBS=-lm
+export LIBavutil_EXTRALIBS="-lm -pthread"
+export LIBpostproc_EXTRALIBS=-lm
+export LIBswresample_EXTRALIBS=-lm
+export LIBswscale_EXTRALIBS=-lm
+
+# Makeflags.
 export MAKE_ENV=V=1 \
-  libavcodec_extralibs="${LIBavcodec_EXTRALIBS}" \
-  libavdevice_extralibs="${LIBavdevice_EXTRALIBS}" \
-  libavfilter_extralibs="${LIBavfilter_EXTRALIBS}" \
-  libavformat_extralibs="${LIBavformat_EXTRALIBS}" \
-  libavresample_extralibs="${LIBavresample_EXTRALIBS}" \
-  libavutil_extralibs="${LIBavutil_EXTRALIBS}" \
-  libpostproc_extralibs="${LIBpostproc_EXTRALIBS}" \
-  libswresample_extralibs="${LIBswresample_EXTRALIBS}" \
-  libswscale_extralibs="${LIBswscale_EXTRALIBS}" \
-  libavcodec_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib" \
-  libavdevice_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib:${X11BASE}/lib" \
-  libavfilter_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib:${X11BASE}/lib" \
-  libavformat_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib" \
-  libavresample_linkflags="" \
-  libavutil_linkflags="" \
-  libpostproc_linkflags="" \
-  libswresample_linkflags="" \
-  libswscale_linkflags="" \
-  libavcodec_requires="libswresample libavutil" \
-  libavdevice_requires="libavfilter libswscale libpostproc libavformat libavcodec libswresample libavresample libavutil" \
-  libavfilter_requires="libswscale libpostproc libavformat libavcodec libswresample libavresample libavutil" \
-  libavformat_requires="libavcodec libswresample libavutil" \
-  libavresample_requires="libavutil" \
-  libavutil_requires="" \
-  libpostproc_requires="libavutil" \
-  libswresample_requires="libavutil" \
-  libswscale_requires="libavutil"
+		libavcodec_extralibs="${LIBavcodec_EXTRALIBS}" \
+		libavdevice_extralibs="${LIBavdevice_EXTRALIBS}" \
+		libavfilter_extralibs="${LIBavfilter_EXTRALIBS}" \
+		libavformat_extralibs="${LIBavformat_EXTRALIBS}" \
+		libavresample_extralibs="${LIBavresample_EXTRALIBS}" \
+		libavutil_extralibs="${LIBavutil_EXTRALIBS}" \
+		libpostproc_extralibs="${LIBpostproc_EXTRALIBS}" \
+		libswresample_extralibs="${LIBswresample_EXTRALIBS}" \
+		libswscale_extralibs="${LIBswscale_EXTRALIBS}" \
+		libavcodec_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib" \
+		libavdevice_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib:${X11BASE}/lib" \
+		libavfilter_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib:${X11BASE}/lib" \
+		libavformat_linkflags="-Wl,-rpath-link,${LOCALBASE}/lib" \
+		libavresample_linkflags="" \
+		libavutil_linkflags="" \
+		libpostproc_linkflags="" \
+		libswresample_linkflags="" \
+		libswscale_linkflags="" \
+		libavcodec_requires="libswresample libavutil" \
+		libavdevice_requires="libavfilter libswscale libpostproc libavformat libavcodec libswresample libavresample libavutil" \
+		libavfilter_requires="libswscale libpostproc libavformat libavcodec libswresample libavresample libavutil" \
+		libavformat_requires="libavcodec libswresample libavutil" \
+		libavresample_requires="libavutil" \
+		libavutil_requires="" \
+		libpostproc_requires="libavutil" \
+		libswresample_requires="libavutil" \
+		libswscale_requires="libavutil"
+
+export MAKE_FLAGS=${VERSION_FLAGS} \
+		LIBavcodec_EXTRALIBS="-lswresample -lavutil ${LIBavcodec_EXTRALIBS}" \
+		LIBavdevice_EXTRALIBS="-lavfilter -lswscale -lpostproc -lavformat -lavcodec -lswresample -lavresample -lavutil ${LIBavdevice_EXTRALIBS}" \
+		LIBavfilter_EXTRALIBS="-lswscale -lpostproc -lavformat -lavcodec -lswresample -lavresample -lavutil ${LIBavfilter_EXTRALIBS}" \
+		LIBavformat_EXTRALIBS="-lavcodec -lswresample -lavutil ${LIBavformat_EXTRALIBS}" \
+		LIBavresample_EXTRALIBS="-lavutil ${LIBavresample_EXTRALIBS}" \
+		LIBavutil_EXTRALIBS="${LIBavutil_EXTRALIBS}" \
+		LIBpostproc_EXTRALIBS="-lavutil ${LIBpostproc_EXTRALIBS}" \
+		LIBswresample_EXTRALIBS="-lavutil ${LIBswresample_EXTRALIBS}" \
+		LIBswscale_EXTRALIBS="-lavutil ${LIBswscale_EXTRALIBS}"
+
+
+
 
 #for patch in patch-*; do
 #    patch -p0 < "$patch"
@@ -69,8 +98,8 @@ export MAKE_ENV=V=1 \
     --objcc="/usr/bin/false" \
     --optflags="-Wno-redundant-decls"
 
-make
-make DESTDIR="$1" install
+gmake
+gmake DESTDIR="$1" install
 
 # Remove examples.
 rm -rf "$1/usr/share/ffmpeg/examples"
