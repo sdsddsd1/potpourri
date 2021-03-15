@@ -1,4 +1,4 @@
-https://github.com/ccache/ccache/releases/download/v4.1/ccache-4.1.tar.xz
+https://github.com/ccache/ccache/releases/download/v4.2/ccache-4.2.tar.xz
 patches/patch-CMakeLists_txt
 patches/patch-cmake_GenerateConfigurationFile_cmake
 patches/patch-cmake_config_h_in

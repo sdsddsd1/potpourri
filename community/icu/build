@@ -6,8 +6,8 @@
 
 # ccache is causing the issue to expect clang instead of gcc.
 # Just disable it.
-export CC="${CC:-/usr/local/bin/cc}"
-export CXX="${CXX:-/usr/local/bin/c++}"
+#export CC="${CC:-/usr/local/bin/cc}"
+#export CXX="${CXX:-/usr/local/bin/c++}"
 
 source/configure
 

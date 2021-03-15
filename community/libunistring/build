@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+export CC=cc
+
+./configure
+
+make
+make DESTDIR="$1" install

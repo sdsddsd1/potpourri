@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+./configure \
+    --disable-nls \
+    --without-libtextstyle-prefix
+
+make
+make DESTDIR="$1" install

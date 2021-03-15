@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+#patch -p1 < patch-lib_the_Foundation_Depends_cmake lib/the_Foundation/Depends.cmake
+patch -p1 < foundation.patch lib/the_Foundation/Depends.cmake
+
+export DESTDIR="$1"
+export CC=cc
+
+cmake -B build
+#    -DTFDN_ENABLE_SSE41=No
+
+cmake --build   build
+cmake --install build

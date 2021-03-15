@@ -1,0 +1,14 @@
+--- Depends.cmake	Sun Mar 14 22:33:17 2021
++++ Depends.cmake.new	Sun Mar 14 22:40:33 2021
+@@ -10,10 +10,7 @@
+         set (iHaveCurl NO)
+     endif ()
+     if (TFDN_ENABLE_TLSREQUEST)
+-        pkg_check_modules (OPENSSL eopenssl11)  # BSD
+-	if (NOT OPENSSL_FOUND)
+-            pkg_check_modules (OPENSSL openssl)
+-        endif ()
++				pkg_check_modules (OPENSSL openssl)
+     else ()
+         set (OPENSSL_FOUND NO)
+         set (iHaveOpenSSL NO)

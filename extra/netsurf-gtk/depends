@@ -1,2 +1,6 @@
+bison make
 gperf make
+gmake make
+gtk+3
+libjpeg-turbo
 libpng

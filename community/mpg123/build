@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export CC=cc
+
+./configure \
+    --enable-static \
+    --disable-lfs-alias \
+    --with-audio=sndio \
+    --with-optimization=0
+
+gmake
+gmake DESTDIR="$1" install
