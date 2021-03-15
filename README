@@ -6,7 +6,7 @@ a OBSD base system. Native packages should not be
 needed.
 
 Does this make sense? Thats up to you to decide!
-ffmpeg, mpv and youtubedl - chain are working.
+ffmpeg, mpv, youtube-dl, netsurf, lagrange working.
 Webkit2gtk is linking  to the wrong version of
 icu.so and is not findable for eg surf.
 
